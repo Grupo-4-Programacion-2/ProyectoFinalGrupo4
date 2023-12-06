@@ -5,6 +5,7 @@ import '../../../providers/user_provider.dart';
 class LoginCodeController extends GetxController {
   TextEditingController codeController = TextEditingController();
 
+
   UsersProvider usersProvider = UsersProvider();
 
   void validateCode() async {

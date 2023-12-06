@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
   Widget _bottomBar() {
     return Obx(() => CustomAnimatedBottomBar(
       containerHeight: 70,
-      backgroundColor: Colors.deepPurpleAccent,
+      backgroundColor: Colors.deepPurple,
       showElevation: true,
       itemCornerRadius: 24,
       curve: Curves.easeIn,

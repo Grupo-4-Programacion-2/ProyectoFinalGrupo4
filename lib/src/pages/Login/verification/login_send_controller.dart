@@ -6,9 +6,9 @@ class LoginSendController extends GetxController {
   TextEditingController sendCodeController = TextEditingController();
 
   UsersProvider usersProvider = UsersProvider();
-
+  late String email;
   void updateCodeForgot() async {
-    String email = sendCodeController.text.trim();
+    email = sendCodeController.text.trim();
     if (isValidForm(email)) {
       await usersProvider.updateCode(email);
       sendCodeController.text = "";

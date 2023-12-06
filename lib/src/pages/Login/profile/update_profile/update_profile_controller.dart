@@ -132,7 +132,7 @@ class UserProfileUpdateController extends GetxController{
         child: const Text(
           'IR A GALERIA',
           style: TextStyle(
-              color: Colors.black
+              color: Colors.white
           ),
         )
     );
@@ -144,7 +144,7 @@ class UserProfileUpdateController extends GetxController{
         child: const Text(
           'IR A CAMARA',
           style: TextStyle(
-              color: Colors.black
+              color: Colors.white
           ),
         )
     );

@@ -31,12 +31,11 @@ class RememberDetailController extends GetxController {
 
   void ToHome() {
     Delete();
-    //Get.toNamed('/home');
-    Get.offNamedUntil('/home', (route) => false);
+    Get.offNamed('/home');
   }
 
   void ToBack() {
-    Get.offNamedUntil('/home', (route) => false);
+    Get.offNamed('/home');
   }
 
   void goToUpdateRemember(Remembers remembers) {

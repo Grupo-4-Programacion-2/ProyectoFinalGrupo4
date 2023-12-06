@@ -97,7 +97,7 @@ class LoginPage extends StatelessWidget {
           child: const Text(
             "SIGN IN",
             style: TextStyle(
-                color: Colors.black
+                color: Colors.white
             ),
           )),
     );
@@ -131,7 +131,7 @@ class LoginPage extends StatelessWidget {
           onTap: () => controller.goToRegisterPage(),
           child: Text("¡Registrate Aqui!",
             style: TextStyle(
-                color: Colors.blue,
+                color: Colors.redAccent,
                 fontWeight: FontWeight.bold,
                 fontSize: 16
             ),),
@@ -155,7 +155,7 @@ class LoginPage extends StatelessWidget {
           onTap: () => controller.goToRecoverPassword(),
           child: Text("¡Ir Aqui!",
             style: TextStyle(
-                color: Colors.green,
+                color: Colors.blueAccent,
                 fontWeight: FontWeight.bold,
                 fontSize: 12
             ),),

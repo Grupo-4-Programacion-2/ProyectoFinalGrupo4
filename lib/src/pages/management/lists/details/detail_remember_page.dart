@@ -52,7 +52,7 @@ class RememberDetailPage extends StatelessWidget {
         title: Text(
           'Nota ${remembers.id}',
           style: TextStyle(
-              color: Colors.black
+              color: Colors.white
           ),
         ),
       ),
@@ -65,8 +65,9 @@ class RememberDetailPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20),
       child: ListTile(
-        title: Text('Fecha del recordatorio'),
-        subtitle: Text('${con.remembers.fechaCita ?? ''}'),
+        title: Text('Fecha y Hora'),
+        subtitle: Text('${con.remembers.fechaCita ?? ''} '
+            '${con.remembers.horaCita ?? ''}'),
         trailing: Icon(Icons.timer),
       ),
     );
@@ -169,8 +170,8 @@ class RememberDetailPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20),
       child: ListTile(
-        title: Text('Nombre'),
-        subtitle: Text(user.name ?? ''),
+        title: Text('Nombre Completo'),
+        subtitle: Text('${user.name ?? ''} ${user.lastname ?? ''}'),
         trailing: Icon(Icons.person),
       ),
     );

@@ -40,7 +40,7 @@ class RegisterCodePage extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.5,
-      color: Colors.red,
+      color: Colors.deepPurple,
     );
   }
 
@@ -95,7 +95,7 @@ class RegisterCodePage extends StatelessWidget {
           child: Text(
             'Verficar',
             style: TextStyle(
-                color: Colors.black
+                color: Colors.white
             ),
           )
       ),

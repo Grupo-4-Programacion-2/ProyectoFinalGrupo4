@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../providers/user_provider.dart';
+import '../verification/login_send_controller.dart';
 
 class LoginChangeController extends GetxController {
   TextEditingController emailController = TextEditingController();
@@ -9,14 +10,16 @@ class LoginChangeController extends GetxController {
 
   UsersProvider usersProvider = UsersProvider();
 
+  LoginSendController loginSendController = Get.put(LoginSendController());
 
   void changePassword() async {
-    String email  = emailController.text.trim();
     String password = passwordController.text.trim();
     String confirmPassword  = confirmPasswordController.text.trim();
 
-    if (isValidForm(email, password, confirmPassword)) {
-      await usersProvider.updatePassword(email,password);
+    print(loginSendController.email);
+
+    if (isValidForm(password, confirmPassword)) {
+      await usersProvider.updatePassword(loginSendController.email,password);
       Get.snackbar('INFORMACION', 'Inicia Sesion');
       emailController.text = "";
       passwordController.text = "";
@@ -25,17 +28,7 @@ class LoginChangeController extends GetxController {
     }
   }
 
-  bool isValidForm(String email, String password, String confirmPassword) {
-    if (email.isEmpty) {
-      Get.snackbar('INFORMACION', 'Campo Correo Electronico Requerido');
-      return false;
-    }
-
-    if (!GetUtils.isEmail(email)) {
-      Get.snackbar('INFORMACION', 'El Correo Electronico no es valido');
-      return false;
-    }
-
+  bool isValidForm(String password, String confirmPassword) {
     if (password.isEmpty) {
       Get.snackbar('INFORMACION', 'Campo Contraseña Requerido');
       return false;

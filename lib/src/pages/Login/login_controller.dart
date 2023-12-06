@@ -15,9 +15,6 @@ class LoginController extends GetxController {
 
   UsersProvider usersProvider = UsersProvider();
 
-
-
-
   void goToRegisterPage() {
     Get.toNamed("/register");
   }
@@ -25,9 +22,6 @@ class LoginController extends GetxController {
   void goToRecoverPassword() {
     Get.toNamed("/login/recover");
   }
-
-
-
 
   void login(context) async {
     String email = emailController.text.trim();

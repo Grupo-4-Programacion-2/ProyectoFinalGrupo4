@@ -40,7 +40,7 @@ class LoginSendPage extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.5,
-      color: Colors.amberAccent,
+      color: Colors.deepPurple,
     );
   }
 
@@ -95,7 +95,7 @@ class LoginSendPage extends StatelessWidget {
           child: Text(
             'Enviar Codigo',
             style: TextStyle(
-                color: Colors.black
+                color: Colors.white
             ),
           )
       ),

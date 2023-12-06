@@ -21,12 +21,12 @@ class noteMapPage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'UBICACION EN MAPA',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
       home: Scaffold(
         body: _googleMaps(),
         floatingActionButton: Container(
-          margin: EdgeInsets.only(right: 110),
+          margin: EdgeInsets.only(right: 110, bottom: 670),
           child: FloatingActionButton.extended(
             onPressed: con.goToTheLake,
             label: Text('Posicion'),
@@ -42,7 +42,7 @@ class noteMapPage extends StatelessWidget {
     return GoogleMap(
       initialCameraPosition: con.initialPosition,
       markers: {Marker(markerId: MarkerId(con.remembers.userId.toString()), position: LatLng(con.remembers.latitud??14.6611132, con.remembers.longitud??-86.18527),infoWindow: InfoWindow(title: 'Ubicacion'))},
-      mapType: MapType.normal,
+      mapType: MapType.satellite,
       onMapCreated: con.onMapCreate,
       myLocationButtonEnabled: false,
       myLocationEnabled: false,

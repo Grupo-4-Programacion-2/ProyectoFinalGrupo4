@@ -149,7 +149,7 @@ class RegisterController extends GetxController {
         },
         child: Text(
           'IR A GALERIA',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ));
     Widget cameraButton = ElevatedButton(
         onPressed: () {
@@ -158,7 +158,7 @@ class RegisterController extends GetxController {
         },
         child: Text(
           'IR A CAMARA',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ));
 
     AlertDialog alertDialog = AlertDialog(

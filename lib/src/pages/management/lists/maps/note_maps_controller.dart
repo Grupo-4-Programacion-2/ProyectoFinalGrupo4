@@ -32,6 +32,6 @@ class noteMapController extends GetxController {
         target: LatLng(
             remembers.latitud ?? 14.6611132, remembers.longitud ?? -86.18527),
         tilt: 59.440717697143555,
-        zoom: 14.151926040649414)));
+        zoom: 18.151926040649414)));
   }
 }

@@ -29,7 +29,7 @@ class InfoPage extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.35,
-      color: Colors.deepPurpleAccent,
+      color: Colors.deepPurple,
     );
   }
 

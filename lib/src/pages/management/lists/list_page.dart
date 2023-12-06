@@ -22,7 +22,11 @@ class RemembersListPage extends StatelessWidget {
                     unselectedLabelColor: Colors.grey[600],
                     tabs: List<Widget>.generate(con.status.length, (index) {
                       return Tab(
-                        child: Text(con.status[index]),
+                        child: Text(con.status[index],
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15
+                        ),),
                       );
                     }),
                   ),
@@ -79,7 +83,7 @@ class RemembersListPage extends StatelessWidget {
                 child: Container(
                   margin: EdgeInsets.only(top: 5),
                   child: Text(
-                    'Recordatorio #${remembers.id}',
+                    'NOTA ${remembers.id}',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,

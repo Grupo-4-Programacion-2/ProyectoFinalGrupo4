@@ -41,13 +41,13 @@ class RegisterPage extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.40,
-      color: Colors.blue,
+      color: Colors.deepPurple,
     );
   }
 
   Widget _boxForm(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.68,
+      height: MediaQuery.of(context).size.height * 0.65,
       margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.29, left: 50, right: 50),
       decoration: BoxDecoration(
           color: Colors.white,
@@ -174,7 +174,7 @@ class RegisterPage extends StatelessWidget {
           child: const Text(
             'REGISTRAR',
             style: TextStyle(
-                color: Colors.black
+                color: Colors.white
             ),
           )
       ),
@@ -193,7 +193,7 @@ class RegisterPage extends StatelessWidget {
                 backgroundImage: controller.imageFile != null
                     ? FileImage(controller.imageFile!)
                     : AssetImage('assets/img/user_profile.png') as ImageProvider,
-                radius: 60,
+                radius: 75,
                 backgroundColor: Colors.white,
               ),
             )

@@ -40,7 +40,7 @@ class LoginChangePassword extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.5,
-      color: Colors.red,
+      color: Colors.deepPurple,
     );
   }
 
@@ -62,24 +62,10 @@ class LoginChangePassword extends StatelessWidget {
         child: Column(
           children: [
             _textYourInfo(),
-            _textFieldEmail(),
             _textFieldPassword(),
             _textFieldConfirmPassword(),
             _buttonRegister(context)
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _textFieldEmail() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 40),
-      child: TextField(
-        controller: controller.emailController,
-        decoration: const InputDecoration(
-            hintText: 'Correo Electronico',
-            prefixIcon: Icon(Icons.email)
         ),
       ),
     );
@@ -126,7 +112,7 @@ class LoginChangePassword extends StatelessWidget {
           child: Text(
             'Cambiar',
             style: TextStyle(
-                color: Colors.black
+                color: Colors.white
             ),
           )
       ),

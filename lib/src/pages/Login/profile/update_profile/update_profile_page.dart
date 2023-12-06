@@ -43,13 +43,13 @@ class UserProfileUpdatePage extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.35,
-      color: Colors.amber,
+      color: Colors.deepPurple,
     );
   }
 
   Widget _boxForm(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.68,
+      height: MediaQuery.of(context).size.height * 0.45,
       margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.29, left: 50, right: 50),
       decoration: BoxDecoration(
           color: Colors.white,
@@ -129,7 +129,7 @@ class UserProfileUpdatePage extends StatelessWidget {
           child: Text(
             'ACTUALIZAR',
             style: TextStyle(
-                color: Colors.black
+                color: Colors.white
             ),
           )
       ),
@@ -149,7 +149,7 @@ class UserProfileUpdatePage extends StatelessWidget {
                     ? FileImage(controller.imageFile!)
                     : controller.user.photo != null ? NetworkImage(controller.user.photo!)
                     : AssetImage('assets/img/user_profile.png') as ImageProvider,
-                radius: 60,
+                radius: 75,
                 backgroundColor: Colors.white,
               ),
             )
