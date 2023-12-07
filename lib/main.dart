@@ -21,6 +21,8 @@ import 'package:pm2_pf_grupo_4/src/pages/register/register_page.dart';
 import 'package:pm2_pf_grupo_4/src/pages/register/verification/register_code_page.dart';
 import 'package:pm2_pf_grupo_4/src/providers/push_notifications_provider.dart';
 import 'package:pm2_pf_grupo_4/src/utils/firebase_config.dart';
+import 'package:pm2_pf_grupo_4/shared_preferences/preferences.dart';
+
 
 
 PushNotificationsProvider pushNotificationsProvider = PushNotificationsProvider();
@@ -33,12 +35,14 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Preferences.init();
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: FirebaseConfig.currentPlatform);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   pushNotificationsProvider.initPushNotifications();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -60,8 +64,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       getPages:  [
-        GetPage(name: '/', page: () => LoginPage()),
-        //GetPage(name: '/', page: () => HomePage()),
+        GetPage(name: '/', page: () => Preferences.isSession == true ? HomePage() : LoginPage()),
         GetPage(name: '/register', page: () => RegisterPage()),
         GetPage(name: '/register/codes', page: () => RegisterCodePage()),
         GetPage(name: '/login/recover', page: () => LoginSendPage()),

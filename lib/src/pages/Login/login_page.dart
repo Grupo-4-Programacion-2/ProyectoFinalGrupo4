@@ -1,37 +1,47 @@
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-
 import 'login_controller.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginController controller = Get.put(LoginController());
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  late LoginController controller;
+
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.put(LoginController());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        bottomNavigationBar: Container(
-          height: 50,
-          child: _textNoHaveAccount(),
-        ),
-        body: Stack(
-          children: [
-            _backgroundCover(context),
-            _boxForm(context),
-            Column(
-              children: [
-                _imagecover(),
-                _TextAppName()
-              ],
-            )
-          ],
-        )
+    return Scaffold(
+      bottomNavigationBar: Container(
+        height: 50,
+        child: _textNoHaveAccount(),
+      ),
+      body: Stack(
+        children: [
+          _backgroundCover(context),
+          _boxForm(context),
+          Column(
+            children: [
+              _imagecover(),
+              _TextAppName(),
+            ],
+          )
+        ],
+      ),
     );
   }
 
   Widget _boxForm(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.45,
+      height: MediaQuery.of(context).size.height * 0.50,
       margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.36, left: 50, right: 50),
       decoration: BoxDecoration(
           color: Colors.white,
@@ -50,12 +60,37 @@ class LoginPage extends StatelessWidget {
             _textFieldEmailBF(),
             _textFieldPasswordBF(),
             _buttonLogin(context),
+            _checkBox(),
             _forgotPassword()
           ],
         ),
       ),
     );
   }
+
+  Widget _checkBox(){
+    return Container(
+      margin: EdgeInsets.symmetric(),
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CheckboxListTile(
+            value: controller.checkData,
+            title: Text('Guardar Credenciales'),
+            onChanged: ( value ){
+              setState(() {
+                controller.checkData = value;
+              });
+            },
+            secondary: const Icon(Icons.safety_check),
+          )
+        ],
+      ),
+    );
+  }
+
+
 
   Widget _textFieldEmailBF() {
     return Container(
@@ -74,14 +109,18 @@ class LoginPage extends StatelessWidget {
   Widget _textFieldPasswordBF() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-      child:  TextField(
-        controller: controller.passwordController,
-        keyboardType: TextInputType.text,
-        obscureText: true,
-        decoration: InputDecoration(
-          hintText: "Password",
-          prefixIcon: Icon(Icons.lock),
-        ),
+      child:  Column(
+        children: [
+          TextField(
+            controller: controller.passwordController,
+            keyboardType: TextInputType.text,
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: "Password",
+              prefixIcon: Icon(Icons.lock),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -89,7 +128,7 @@ class LoginPage extends StatelessWidget {
   Widget _buttonLogin (BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 27),
+      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
       child: ElevatedButton(
           onPressed: () => controller.login(context),
           style: ElevatedButton.styleFrom(

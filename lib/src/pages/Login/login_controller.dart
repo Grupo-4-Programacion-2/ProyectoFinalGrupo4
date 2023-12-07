@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import '../../../shared_preferences/preferences.dart';
 import '../../models/responde_api.dart';
 import '../../models/user.dart';
 import '../../providers/user_provider.dart';
@@ -12,6 +13,7 @@ class LoginController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 
   User user = User.fromJson(GetStorage().read('user') ?? {});
+  bool? checkData = false;
 
   UsersProvider usersProvider = UsersProvider();
 
@@ -22,6 +24,8 @@ class LoginController extends GetxController {
   void goToRecoverPassword() {
     Get.toNamed("/login/recover");
   }
+
+
 
   void login(context) async {
     String email = emailController.text.trim();
@@ -39,9 +43,16 @@ class LoginController extends GetxController {
       print('Response Api: ${responseApi.toJson()}');
 
       if (responseApi.success == true) {
-        GetStorage()
-            .write('user', responseApi.data); // DATOS DEL USUARIO EN SESION
+        await GetStorage().write('user', responseApi.data); // DATOS DEL USUARIO EN SESION
         User myUser = User.fromJson(GetStorage().read('user') ?? {});
+        if(checkData!){
+          Preferences.name = myUser.name ?? '';
+          Preferences.isSession = true;
+          Preferences.userId = myUser.id ?? '';
+        }
+        print(Preferences.name);
+        print(Preferences.isSession);
+        print(Preferences.userId);
         goToDashboard();
       } else {
         Get.snackbar('Login fallido', responseApi.message ?? '');
