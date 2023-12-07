@@ -6,7 +6,6 @@ import '../../../widgets/no_data_widgets.dart';
 
 class RemembersListPage extends StatelessWidget {
   RemembersListController con = Get.put(RemembersListController());
-
   @override
   Widget build(BuildContext context) {
     return Obx(() => DefaultTabController(
@@ -35,7 +34,7 @@ class RemembersListPage extends StatelessWidget {
               body: TabBarView(
                 children: con.status.map((String status) {
                   return FutureBuilder(
-                      future: con.getRemembers(),
+                      future: con.getRemembers(status),
                       builder:
                           (context, AsyncSnapshot<List<Remembers>> snapshot) {
                         if (snapshot.hasData) {

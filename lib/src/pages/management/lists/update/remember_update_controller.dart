@@ -46,8 +46,14 @@ class RememberUpdateController extends GetxController {
   RememberUpdateController() {
       String lat = remembers.latitud.toString();
       String lgn = remembers.latitud.toString();
+      imageFile = File(remembers.notaFoto!);
 
-      birthdateController.text = remembers.fechaCita ?? '';
+      DateTime fecha = DateTime.parse(remembers.fechaCita!);
+      String fechaFormateada = DateFormat('yyyy-MM-dd').format(fecha);
+      print('Fecha original: ${remembers.fechaCita}');
+      print('Fecha formateada: $fechaFormateada');
+
+      birthdateController.text = fechaFormateada ?? '';
       descripcionController.text = remembers.notaTexto ?? '';
       timeController.text = remembers.horaCita ?? '';
       latController.text = lat;

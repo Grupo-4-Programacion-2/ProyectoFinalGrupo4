@@ -9,12 +9,12 @@ class RemembersListController extends GetxController {
   RememberProvider rememberProvider = RememberProvider();
 
 
-  List<String> status = <String>['RECORDATORIOS'].obs;
+  List<String> status = <String>['PENDIENTES', 'COMPLETADOS'].obs;
 
   User user = User.fromJson(GetStorage().read('user') ?? {});
 
-  Future<List<Remembers>> getRemembers() async {
-    return await rememberProvider.getRemembersData(user.id ?? '');
+  Future<List<Remembers>> getRemembers(String status) async {
+    return await rememberProvider.getRemembersData(user.id ?? '0', status);
   }
 
   void goToOrderDetail (Remembers remembers) {

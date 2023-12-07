@@ -33,10 +33,10 @@ class RememberProvider extends GetConnect {
     return response.stream.transform(utf8.decoder);
   }
 
-  Future<List<Remembers>> getRemembersData(String userId) async {
-    print('$url/getAll/$userId');
+  Future<List<Remembers>> getRemembersData(String userId, String status) async {
+    print('$url/getAll/$userId/$status');
     Response response = await get(
-        '$url/getAll/$userId',
+        '$url/getAll/$userId/$status',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': userSession.sessionToken ?? ''

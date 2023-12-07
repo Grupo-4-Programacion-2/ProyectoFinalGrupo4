@@ -11,6 +11,7 @@ class Remembers {
   String? userId;
   String? notaTexto;
   String? notaVoz;
+  String? status;
   String? notaFoto;
   double? latitud;
   double? longitud;
@@ -22,6 +23,7 @@ class Remembers {
     this.userId,
     this.notaTexto,
     this.notaVoz,
+    this.status,
     this.notaFoto,
     this.latitud,
     this.longitud,
@@ -37,6 +39,7 @@ class Remembers {
         notaFoto: json["notaFoto"],
         latitud: json["latitud"]?.toDouble(),
         longitud: json["longitud"]?.toDouble(),
+        status: json["status"],
       );
 
   static List<Remembers> fromJsonList(List<dynamic> jsonList) {
@@ -60,5 +63,6 @@ class Remembers {
         "notaFoto": notaFoto,
         "latitud": latitud,
         "longitud": longitud,
+        "status": status
       };
 }

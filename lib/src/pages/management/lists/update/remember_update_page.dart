@@ -4,6 +4,7 @@ import 'package:flutter_sound/public/flutter_sound_recorder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:intl/intl.dart';
 import 'package:pm2_pf_grupo_4/src/pages/management/lists/update/remember_update_controller.dart';
 
 import '../../record/audio_controller.dart';

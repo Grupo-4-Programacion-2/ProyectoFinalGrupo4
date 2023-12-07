@@ -6,7 +6,7 @@ import '../../../../models/user.dart';
 import '../../../../providers/user_provider.dart';
 
 class RememberDetailController extends GetxController {
-  late Remembers remembers = Remembers.fromJson(Get.arguments['remembers']);
+  Remembers remembers = Remembers.fromJson(Get.arguments['remembers']);
 
   var total = 0.0.obs;
   var idDelivery = ''.obs;

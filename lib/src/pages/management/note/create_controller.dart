@@ -32,10 +32,8 @@ class CreateController extends GetxController {
 
   ImagePicker picker = ImagePicker();
   File? imageFile;
-
   double? lat;
   double? lgn;
-
 
   void registerRemember(BuildContext context) async {
     String fecha = birthdateController.text;
@@ -83,7 +81,7 @@ class CreateController extends GetxController {
         if (responseApi.success == true) {
           print(responseApi.data); // DATOS DEL USUARIO EN SESION
           Get.snackbar('Registro Exitoso', responseApi.message ?? '');
-          clear();
+           clear();
         } else {
           Get.snackbar('Registro fallido', responseApi.message ?? '');
         }
@@ -175,6 +173,7 @@ class CreateController extends GetxController {
     descripcionController.text = "";
     birthdateController.text = "";
     timeController.text = "";
+    imageFile = File('assets/img/foto.png');
     update();
   }
 }

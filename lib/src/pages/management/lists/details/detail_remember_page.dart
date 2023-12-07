@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:pm2_pf_grupo_4/src/pages/management/lists/details/detail_remember_controller.dart';
 
 import '../../../../models/remembers.dart';
 import '../../../../models/user.dart';
 import '../../record/player_controller.dart';
+
 
 class RememberDetailPage extends StatelessWidget {
 
@@ -18,12 +20,14 @@ class RememberDetailPage extends StatelessWidget {
   late Remembers remembers = Remembers.fromJson(Get.arguments['remembers']);
   final PlayerController playerController = Get.put(PlayerController());
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold( //Obx(() =>
       bottomNavigationBar: Container(
         color: Color.fromRGBO(245, 245, 245, 1),
-        height: "" == ""
+        height:  con.remembers.status == "PENDIENTES"
             ? MediaQuery.of(context).size.height * 0.57
             : MediaQuery.of(context).size.height * 0.57,
         // padding: EdgeInsets.only(top: 5),
@@ -34,8 +38,8 @@ class RememberDetailPage extends StatelessWidget {
             _nameRemember(),
             _nameAudio(),
             _PlayAudio(),
-            Row( // Utilizar un Row para alinear los botones
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Alinear los botones en el espacio disponible
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buttonGoToOrderMap(),
                 _buttonGoToUpdate(),
@@ -62,11 +66,15 @@ class RememberDetailPage extends StatelessWidget {
 
 
   Widget _dataDate() {
+    DateTime fecha = DateTime.parse(con.remembers.fechaCita!);
+    String fechaFormateada = DateFormat('yyyy-MM-dd').format(fecha);
+    print('Fecha original: ${con.remembers.fechaCita}');
+    print('Fecha formateada: $fechaFormateada');
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20),
       child: ListTile(
         title: Text('Fecha y Hora'),
-        subtitle: Text('${con.remembers.fechaCita ?? ''} '
+        subtitle: Text('${fechaFormateada ?? ''} '
             '${con.remembers.horaCita ?? ''}'),
         trailing: Icon(Icons.timer),
       ),
