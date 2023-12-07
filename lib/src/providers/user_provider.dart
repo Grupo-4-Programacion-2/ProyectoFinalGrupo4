@@ -77,6 +77,7 @@ class UsersProvider extends GetConnect {
   }
 
   Future<ResponseApi> updateCode(String email) async {
+    print('$url/sendcode');
     Response response = await post(
         '$url/sendcode',
         {

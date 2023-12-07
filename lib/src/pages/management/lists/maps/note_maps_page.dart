@@ -57,7 +57,7 @@ class noteMapPage extends StatelessWidget {
           infoWindow: InfoWindow(title: 'Ubicacion'),
         )
       },
-      mapType: MapType.satellite,
+      mapType: MapType.hybrid,
       onMapCreated: con.onMapCreate,
       myLocationButtonEnabled: false,
       myLocationEnabled: false,

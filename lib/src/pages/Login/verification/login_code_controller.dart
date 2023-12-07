@@ -17,7 +17,7 @@ class LoginCodeController extends GetxController {
         Get.snackbar(
             'CODIGO INCORRECTO', 'Su codigo es incorrecto, digitelo bien');
       } else {
-        Get.snackbar('INFORMACION', 'Listo para cambiar tu contraseña59');
+        Get.snackbar('INFORMACION', 'Listo para cambiar tu contraseña');
         goToChangePassword();
       }
     }

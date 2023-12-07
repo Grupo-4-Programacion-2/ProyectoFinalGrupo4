@@ -14,7 +14,7 @@ import '../../../../models/responde_api.dart';
 import '../../../../models/user.dart';
 import '../../../../providers/remember_provider.dart';
 import '../../address/map/create_map_page.dart';
-import '../../record/audio_controller.dart';
+import '../../record/resources_audio/audio_controller.dart';
 import '../details/detail_remember_controller.dart';
 
 class RememberUpdateController extends GetxController {
@@ -27,7 +27,7 @@ class RememberUpdateController extends GetxController {
 
   RememberDetailController rememberDetailController = Get.find();
 
-  AudioController audioController = Get.put(AudioController());
+  AudioUpdateController audioUpdateController = Get.put(AudioUpdateController());
 
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
@@ -88,8 +88,8 @@ class RememberUpdateController extends GetxController {
     if (isValidForm(fecha, descripcion)) {
       //This "if" is for register data
 
-      // ProgressDialog progressDialog = ProgressDialog(context: context);
-      // progressDialog.show(max: 100, msg: "REDIRECCIONANDO...");
+      ProgressDialog progressDialog = ProgressDialog(context: context);
+      progressDialog.show(max: 100, msg: "REDIRECCIONANDO...");
 
       Remembers remembers22 = Remembers(
           id: remembers.id,
@@ -97,7 +97,7 @@ class RememberUpdateController extends GetxController {
           horaCita: hora,
           userId: userSession.id,
           notaTexto: descripcion,
-          notaVoz: audioController.pathToAudio == audioController.pathToAudio ? remembers.notaVoz : audioController.pathToAudio,
+          notaVoz: audioUpdateController.pathToAudio == '' ? remembers.notaVoz : audioUpdateController.pathToAudio,
           latitud: refPointController.text == '' ? remembers.latitud : latRefPoint,
           longitud: refPointController.text == '' ? remembers.longitud : lngRefPoint);
 
@@ -112,29 +112,29 @@ class RememberUpdateController extends GetxController {
         print('lgn = ${remembers22.longitud}');
       }
 
-      // if (imageFile == null) {
-      //   ResponseApi responseApi = await rememberProvider.update(remembers22);
-      //   print("Response Api Update: ${responseApi.data}");
-      //   Get.snackbar('Actualizacion Exitosa', responseApi.message ?? '');
-      //   progressDialog.close();
-      //   if (responseApi.success == true) {
-      //     goToBackForCancel();
-      //   }
-      // } else {
-      //   Stream stream = await rememberProvider.updateWithImage(remembers22, imageFile!);
-      //
-      //   stream.listen((res) {
-      //     progressDialog.close();
-      //     ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
-      //     Get.snackbar('Actualizacion Exitosa', responseApi.message ?? '');
-      //     print("Response Api Update: ${responseApi.data}");
-      //     if (responseApi.success == true) {
-      //       goToBackForCancel();
-      //     } else {
-      //       Get.snackbar('Actualizacion Fallida', responseApi.message ?? '');
-      //     }
-      //   });
-      // }
+      if (imageFile == null) {
+        ResponseApi responseApi = await rememberProvider.update(remembers22);
+        print("Response Api Update: ${responseApi.data}");
+        Get.snackbar('Actualizacion Exitosa', responseApi.message ?? '');
+        progressDialog.close();
+        if (responseApi.success == true) {
+          goToBackForCancel();
+        }
+      } else {
+        Stream stream = await rememberProvider.updateWithImage(remembers22, imageFile!);
+
+        stream.listen((res) {
+          progressDialog.close();
+          ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
+          Get.snackbar('Actualizacion Exitosa', responseApi.message ?? '');
+          print("Response Api Update: ${responseApi.data}");
+          if (responseApi.success == true) {
+            goToBackForCancel();
+          } else {
+            Get.snackbar('Actualizacion Fallida', responseApi.message ?? '');
+          }
+        });
+      }
     }
   }
 

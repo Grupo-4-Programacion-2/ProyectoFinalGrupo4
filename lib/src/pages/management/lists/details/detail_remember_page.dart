@@ -135,6 +135,7 @@ class RememberDetailPage extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 20),
       child: ListTile(
         title: Text('Reproducir Audio'),
+        trailing: Icon(Icons.play_circle_filled_sharp),
       ),
     );
   }
