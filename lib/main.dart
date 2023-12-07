@@ -10,6 +10,8 @@ import 'package:pm2_pf_grupo_4/src/pages/Login/profile/update_profile/update_pro
 import 'package:pm2_pf_grupo_4/src/pages/Login/verification/login_code_page.dart';
 import 'package:pm2_pf_grupo_4/src/pages/Login/verification/login_send_page.dart';
 import 'package:pm2_pf_grupo_4/src/pages/dashboard/home_page.dart';
+import 'package:pm2_pf_grupo_4/src/pages/management/address/create/create_address_page.dart';
+import 'package:pm2_pf_grupo_4/src/pages/management/address/list/address_list_page.dart';
 import 'package:pm2_pf_grupo_4/src/pages/management/lists/details/detail_remember_page.dart';
 import 'package:pm2_pf_grupo_4/src/pages/management/lists/list_page.dart';
 import 'package:pm2_pf_grupo_4/src/pages/management/lists/maps/note_maps_page.dart';
@@ -65,6 +67,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       getPages:  [
         GetPage(name: '/', page: () => Preferences.isSession == true ? HomePage() : LoginPage()),
+        //GetPage(name: '/', page: () => Preferences.isSession == true ? HomePage() : ClientAddressListPage()),
         GetPage(name: '/register', page: () => RegisterPage()),
         GetPage(name: '/register/codes', page: () => RegisterCodePage()),
         GetPage(name: '/login/recover', page: () => LoginSendPage()),
@@ -78,7 +81,9 @@ class _MyAppState extends State<MyApp> {
         GetPage(name: '/remember/list/detail/update', page: () => RememberUpdatePage()),
         GetPage(name: '/record', page: () => RecordPage(), binding: AudioBinding()), //, binding: AudioBinding()
         GetPage(name: '/login/profile/info', page: () => InfoPage()),
-        GetPage(name: '/login/profile/info/update', page: () => UserProfileUpdatePage())
+        GetPage(name: '/login/profile/info/update', page: () => UserProfileUpdatePage()),
+        GetPage(name: '/client/address/create', page: () => ClientAddressCreatePage()),
+        GetPage(name: '/client/address/list', page: () => ClientAddressListPage()),
       ],
       theme: ThemeData(
           primaryColor: Colors.amber,

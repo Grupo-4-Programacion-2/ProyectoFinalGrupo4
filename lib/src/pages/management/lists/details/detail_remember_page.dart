@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:pm2_pf_grupo_4/src/pages/management/lists/details/detail_remember_controller.dart';
-
+import 'package:share_plus/share_plus.dart';
 import '../../../../models/remembers.dart';
 import '../../../../models/user.dart';
 import '../../record/player_controller.dart';
@@ -52,13 +52,21 @@ class RememberDetailPage extends StatelessWidget {
       ),
 
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.deepPurple),
+        iconTheme:  IconThemeData(color: Colors.deepPurple),
         title: Text(
           'Nota ${remembers.id}',
-          style: TextStyle(
+          style:  TextStyle(
               color: Colors.white
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+                con.share();
+              },
+            icon: Icon(Icons.share, color: Colors.white,),
+          ),
+        ],
       ),
       body: _cardProduct()
       );

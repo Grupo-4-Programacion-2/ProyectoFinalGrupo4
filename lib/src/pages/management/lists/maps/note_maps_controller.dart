@@ -24,9 +24,7 @@ class noteMapController extends GetxController {
       zoom: 15.151926040649414);
 
   Future<void> goToTheLake() async {
-  ;
-
-    final GoogleMapController controller = await mapController.future;
+      final GoogleMapController controller = await mapController.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
         bearing: 192.8334901395799,
         target: LatLng(

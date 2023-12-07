@@ -54,6 +54,11 @@ dependencies:
   path: ^1.8.3
   path_provider: ^2.0.15
   shared_preferences: ^2.0.13
+  geolocator: ^9.0.2
+  geocoding: ^2.1.0
+  location: ^5.0.2+1
+  fluttertoast: ^8.0.9
+  share_plus: ^7.2.1
 
 dev_dependencies:
   flutter_test:

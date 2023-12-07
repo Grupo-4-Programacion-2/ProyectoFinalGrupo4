@@ -1,20 +1,22 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/public/flutter_sound_recorder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:intl/intl.dart';
 import 'package:pm2_pf_grupo_4/src/pages/management/lists/update/remember_update_controller.dart';
 
-import '../../record/audio_controller.dart';
-import '../../record/player_controller.dart';
+import '../../address/create/create_address_page.dart';
+import '../../record/resources_audio/audio_controller.dart';
+import '../../record/resources_audio/player_controller.dart';
 
 class RememberUpdatePage extends StatelessWidget {
 
   RememberUpdateController controller = Get.put(RememberUpdateController());
 
-  final PlayerController playerController = Get.put(PlayerController());
+  final PlayerUpdateController playerController = Get.put(PlayerUpdateController());
 
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
@@ -84,8 +86,7 @@ class RememberUpdatePage extends StatelessWidget {
             _textYourInfo(),
             _textFieldBirthdate(context),
             _textFieldTime(context),
-            _textFieldLat(),
-            _textFieldLgn(),
+            _textFieldRefPoint(context),
             _textFieldDescription(),
             _audio(),
             _buttonCreate(context),
@@ -96,8 +97,23 @@ class RememberUpdatePage extends StatelessWidget {
     );
   }
 
+  Widget _textFieldRefPoint(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+      child: TextField(
+        onTap: () => controller.openGoogleMaps(context),
+        controller: controller.refPointController,
+        autofocus: false,
+        focusNode: AlwaysDisabledFocusNode(),
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+            hintText: 'Ubicacion', prefixIcon: Icon(Icons.map)),
+      ),
+    );
+  }
+
   Widget _audio() {
-    return GetBuilder<AudioController>(
+    return GetBuilder<AudioUpdateController>(
       builder: (controller) {
         return Container(
           width: double.infinity,
@@ -224,36 +240,6 @@ class RememberUpdatePage extends StatelessWidget {
     );
   }
 
-  Widget _textFieldLat() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 5),
-      child: TextField(
-        controller: controller.latController,
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(
-            hintText: 'Latitude (Opcional)',
-            prefixIcon: Container(
-                child: Icon(Icons.maps_ugc))
-        ),
-      ),
-    );
-  }
-
-  Widget _textFieldLgn() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-      child: TextField(
-        controller: controller.lgnController,
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(
-            hintText: 'Longitude (Opcional)',
-            prefixIcon: Container(
-                child: Icon(Icons.maps_ugc))
-        ),
-      ),
-    );
-  }
-
   Widget _textFieldTime(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 1),
@@ -297,8 +283,8 @@ class RememberUpdatePage extends StatelessWidget {
             onTap: () => controller.showAlertDialog(context),
             child: GetBuilder<RememberUpdateController> (
               builder: (value) => CircleAvatar(
-                backgroundImage: controller.imageFile != null
-                    ? FileImage(controller.imageFile!)
+                backgroundImage: controller.remembers.notaFoto != null
+                    ? NetworkImage(controller.remembers.notaFoto!)
                     : AssetImage('assets/img/no-image.png') as ImageProvider,
                 radius: 60,
                 backgroundColor: Colors.white,

@@ -3,6 +3,7 @@ import 'package:flutter_sound/public/flutter_sound_recorder.dart';
 import 'package:get/get.dart';
 import 'package:pm2_pf_grupo_4/src/pages/management/note/create_controller.dart';
 
+import '../address/create/create_address_page.dart';
 import '../record/audio_controller.dart';
 import '../record/player_controller.dart';
 
@@ -81,8 +82,9 @@ class CreatePage extends StatelessWidget {
             _textYourInfo(),
             _textFieldBirthdate(context),
             _textFieldTime(context),
-            _textFieldLat(),
-            _textFieldLgn(),
+            _textFieldRefPoint(context),
+            // _textFieldLat(),
+            // _textFieldLgn(),
             _textFieldDescription(),
             _audio(),
             _buttonCreate(context),
@@ -110,39 +112,24 @@ class CreatePage extends StatelessWidget {
     );
   }
 
-  Widget _textFieldLat() {
+  Widget _textFieldRefPoint(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       child: TextField(
-        controller: controller.latController,
-        keyboardType: TextInputType.number,
+        onTap: () => controller.openGoogleMaps(context),
+        controller: controller.refPointController,
+        autofocus: false,
+        focusNode: AlwaysDisabledFocusNode(),
+        keyboardType: TextInputType.text,
         decoration: InputDecoration(
-            hintText: 'Latitude (Opcional)',
-            prefixIcon: Container(
-                child: Icon(Icons.maps_ugc))
-        ),
-      ),
-    );
-  }
-
-  Widget _textFieldLgn() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-      child: TextField(
-        controller: controller.lgnController,
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(
-            hintText: 'Longitude (Opcional)',
-            prefixIcon: Container(
-                child: Icon(Icons.maps_ugc))
-        ),
+            hintText: 'Ubicacion', prefixIcon: Icon(Icons.map)),
       ),
     );
   }
 
   Widget _textFieldTime(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 1),
+      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       child: TextField(
         style: TextStyle(
           color: Colors.black
@@ -160,7 +147,7 @@ class CreatePage extends StatelessWidget {
 
   Widget _textFieldBirthdate(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 1),
+      margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       child: TextField(
         controller: controller.birthdateController,
         readOnly: true,

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pm2_pf_grupo_4/src/pages/management/record/audio_controller.dart';
 import 'package:sn_progress_dialog/progress_dialog.dart';
 import 'package:get_storage/get_storage.dart';
@@ -10,17 +11,16 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:pm2_pf_grupo_4/src/models/remembers.dart';
 
-
 import '../../../models/responde_api.dart';
 import '../../../models/user.dart';
 import '../../../providers/remember_provider.dart';
+import '../address/map/create_map_page.dart';
 
 class CreateController extends GetxController {
   TextEditingController birthdateController = TextEditingController();
   TextEditingController descripcionController = TextEditingController();
   TextEditingController timeController = TextEditingController();
-  TextEditingController latController = TextEditingController();
-  TextEditingController lgnController = TextEditingController();
+  TextEditingController refPointController = TextEditingController();
 
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
@@ -32,21 +32,28 @@ class CreateController extends GetxController {
 
   ImagePicker picker = ImagePicker();
   File? imageFile;
-  double? lat;
-  double? lgn;
+  double latRefPoint = 0.000000;
+  double lngRefPoint = 0.000000;
+
+  void openGoogleMaps(BuildContext context) async {
+    Map<String, dynamic> refPointMap = await showMaterialModalBottomSheet(
+        context: context,
+        builder: (context) => ClientAddressMapPage(),
+        isDismissible: false,
+        enableDrag: false);
+
+    print('REF POINT MAP ${refPointMap}');
+    refPointController.text = refPointMap['address'];
+    latRefPoint = refPointMap['lat'];
+    lngRefPoint = refPointMap['lng'];
+    print('LATITUDE $latRefPoint');
+    print('LONGITUDE $lngRefPoint');
+  }
 
   void registerRemember(BuildContext context) async {
     String fecha = birthdateController.text;
     String descripcion = descripcionController.text.trim();
     String hora = timeController.text.trim();
-
-    if(latController.text.isEmpty && lgnController.text.isEmpty){
-      lat = null;
-      lgn = null;
-    }else{
-      lat = double.parse(latController.text);
-      lgn = double.parse(lgnController.text);
-    }
 
     if (isValidForm(fecha, descripcion)) {
       //This "if" is for register data
@@ -60,9 +67,9 @@ class CreateController extends GetxController {
           userId: userSession.id,
           notaTexto: descripcion,
           notaVoz: audioController.pathToAudio,
-          latitud: lat,
-          longitud: lgn);
-    //
+          latitud: latRefPoint,
+          longitud: lngRefPoint);
+      //
       if (kDebugMode) {
         print('id = ${remembers.userId}');
         print('Description = ${remembers.notaTexto}');
@@ -73,7 +80,8 @@ class CreateController extends GetxController {
         print('lgn = ${remembers.longitud}');
       }
 
-      Stream stream = await rememberProvider.registerRemember(remembers, imageFile!);
+      Stream stream =
+          await rememberProvider.registerRemember(remembers, imageFile!);
       stream.listen((res) {
         progressDialog.close();
         ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
@@ -81,7 +89,7 @@ class CreateController extends GetxController {
         if (responseApi.success == true) {
           print(responseApi.data); // DATOS DEL USUARIO EN SESION
           Get.snackbar('Registro Exitoso', responseApi.message ?? '');
-           clear();
+          clear();
         } else {
           Get.snackbar('Registro fallido', responseApi.message ?? '');
         }
@@ -168,8 +176,7 @@ class CreateController extends GetxController {
   }
 
   void clear() {
-    latController.text = "";
-    lgnController.text = "";
+    refPointController.text = '';
     descripcionController.text = "";
     birthdateController.text = "";
     timeController.text = "";

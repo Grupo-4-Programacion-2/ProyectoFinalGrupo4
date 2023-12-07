@@ -6,7 +6,7 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
 
-class AudioController extends GetxController {
+class AudioUpdateController extends GetxController {
   bool isRecording = false;
   bool isEnable = false;
 
@@ -14,7 +14,7 @@ class AudioController extends GetxController {
 
   late String pathToAudio;
 
-  AudioController(){
+  AudioUpdateController(){
     pathToAudio = '';
   }
 
